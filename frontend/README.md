@@ -2,6 +2,56 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.8.
 
+## Architecture Overview
+
+### Tech Stack
+- **Framework**: Angular 21.2.8 (Standalone Components)
+- **Language**: TypeScript 5.9.2
+- **Rendering**: Server-Side Rendering (SSR) with Express 5.1.0
+- **Styling**: Bootstrap 5.3.8 + Custom CSS
+- **State Management**: RxJS 7.8.0 (Reactive)
+- **Build Tool**: Angular CLI with esbuild
+- **Testing**: Vitest 4.0.8 (Unit Tests)
+
+### Project Structure
+
+```
+src/
+├── app/                          # Main application directory
+│   ├── app.ts                   # Root component (App)
+│   ├── app.routes.ts            # Application routing
+│   ├── app.routes.server.ts     # Server-side routing
+│   ├── app.config.ts            # Client configuration
+│   ├── app.config.server.ts     # Server configuration
+│   ├── app.html                 # Root template
+│   ├── app.css                  # Root styles
+│   ├── home/                    # Home feature module
+│   │   ├── home.ts              # Home component
+│   │   ├── home.html            # Home template
+│   │   └── home.css             # Home styles
+│   └── ...spec.ts               # Unit test files
+├── main.ts                       # Client-side entry point
+├── main.server.ts                # Server-side entry point
+├── server.ts                      # Express server configuration
+└── styles.css                    # Global styles
+
+public/                           # Static assets
+```
+
+### Key Features
+- **Standalone Components**: Uses modern Angular standalone component API (no NgModule)
+- **Server-Side Rendering**: Optimized for SEO with Express server
+- **Modular Routing**: Feature-based routing structure
+- **Responsive Design**: Bootstrap 5 integration for responsive UI
+- **Type Safety**: Full TypeScript support with strict type checking
+- **Automated Testing**: Vitest with unit test files (*.spec.ts)
+
+### Component Architecture
+- **App Component** (`app.ts`): Root component with Router configuration
+- **Routing** (`app.routes.ts`): Defines all routes (Home is default route)
+- **Home Component** (`home/home.ts`): Landing page (feature component)
+- **Server Config** (`app.config.server.ts`, `app.routes.server.ts`): Separate server configurations for SSR
+
 ## Development server
 
 To start a local development server, run:
