@@ -39,7 +39,6 @@ export class ProductCreation {
       next: () => {
         this.isLoading = false;
 
-        // navigate ngay sau khi success
         this.router.navigateByUrl('/product-management');
       },
 
