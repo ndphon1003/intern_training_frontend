@@ -1,0 +1,66 @@
+<div class="pm-container">
+
+  <!-- Header -->
+    <div class="pm-header">
+
+    <div class="left-header">
+        <button class="btn-back" (click)="goBack()">← Back</button>
+        <h2>My Products</h2>
+    </div>
+
+    <span class="count">{{ totalProduct }} items</span>
+
+    </div>
+
+  <!-- Loading -->
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading products...</p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Empty -->
+  <div *ngIf="!isLoading && !products.length" class="empty">
+    No products yet
+  </div>
+
+  <!-- LIST -->
+  <div class="product-list" *ngIf="!isLoading && products.length">
+
+    <div class="product-item" *ngFor="let p of products">
+
+      <div class="left">
+        <div class="name">{{ p.name }}</div>
+        <div class="desc">{{ p.description }}</div>
+
+        <div class="meta">
+          <span>Stock: {{ p.stockQuantity }}</span>
+          <span>Version: v{{ p.currentVersion }}</span>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="price">
+          {{ p.price | number }} ₫
+        </div>
+
+        <div class="status">
+          <span class="badge" [class.public]="p.public">
+            {{ p.public ? 'Public' : 'Private' }}
+          </span>
+        </div>
+
+        <div class="date">
+          {{ p.updatedAt | date:'short' }}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
