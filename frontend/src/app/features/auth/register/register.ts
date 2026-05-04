@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject, NgZone } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
@@ -20,18 +20,12 @@ export class Register {
 
   private authService = inject(AuthService);
   private router = inject(Router);
-  private ngZone = inject(NgZone);
   private cdr = inject(ChangeDetectorRef);
 
   register(): void {
     this.errorMessage = '';
 
-    // Validate inputs
-    if (
-      !this.username.trim() ||
-      !this.password.trim() ||
-      !this.email.trim()
-    ) {
+    if (!this.username.trim() || !this.password.trim() || !this.email.trim()) {
       this.errorMessage = 'Please enter all required fields';
       return;
     }
@@ -42,28 +36,20 @@ export class Register {
     this.authService.register(this.username, this.email, this.password)
       .pipe(
         finalize(() => {
-          // Always reset loading state
           this.isLoading = false;
-          this.cdr.markForCheck();
+          this.cdr.markForCheck(); // cập nhật UI khi hoàn tất
         })
       )
       .subscribe({
         next: (response) => {
-          this.ngZone.run(() => {
-            console.log('Register successful:', response);
-
-            this.router.navigate(['/profile']);
-          });
+          console.log('Register successful:', response);
+          // HttpClient chạy trong zone rồi nên navigate bình thường
+          this.router.navigate(['/profile']);
         },
-
         error: (error) => {
-          this.ngZone.run(() => {
-            console.error('Register failed:', error);
-
-            this.errorMessage = this.mapRegisterError(error);
-
-            this.cdr.markForCheck();
-          });
+          console.error('Register failed:', error);
+          this.errorMessage = this.mapRegisterError(error);
+          this.cdr.markForCheck(); // ép UI hiển thị error ngay
         }
       });
   }
@@ -72,19 +58,15 @@ export class Register {
     if (error.status === 400) {
       return 'Invalid input. Please check your information.';
     }
-
     if (error.status === 409) {
       return 'Username or email already exists.';
     }
-
     if (error.status === 0) {
       return 'Network error. Please check your connection.';
     }
-
     if (error.error?.message) {
       return error.error.message;
     }
-
     return 'Register failed. Please try again.';
   }
 }
