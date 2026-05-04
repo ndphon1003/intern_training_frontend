@@ -172,6 +172,14 @@ export class Profile implements OnInit {
     }
   }
 
+  get canManageProduct(): boolean {
+    return this.authInfo?.role === 'ADMIN' || this.authInfo?.role === 'MANAGER';
+  }
+
+  goToProductManagement() {
+    this.router.navigate(['/product-management']);
+  }
+
   /**
    * Logout user and redirect to login page
    */

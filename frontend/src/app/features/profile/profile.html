@@ -152,6 +152,14 @@
     <!-- Actions -->
     <div class="profile-actions">
 
+        <button
+            class="btn-primary-dark"
+            *ngIf="canManageProduct"
+            (click)="goToProductManagement()"
+            >
+            My Product
+        </button>
+
       <button
         class="btn-secondary-dark"
         *ngIf="!isEditing"
