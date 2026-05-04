@@ -1,4 +1,4 @@
-export interface LoginResponse {
+export interface AuthResponse {
   code: number;
   message: string;
   data: {
@@ -14,4 +14,11 @@ export interface LoginResponse {
 export interface LoginRequest {
   username: string;
   password: string;
+}
+
+export interface RegisterRequest {
+  username: string;
+  email: string;
+  password: string;
+  role: string;
 }

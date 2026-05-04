@@ -1,0 +1,26 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h1>Logout</h1>
+      <p>Are you sure you want to sign out?</p>
+    </div>
+
+    @if (errorMessage) {
+      <div class="error-message" role="alert">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <button 
+      class="btn-primary-dark" 
+      (click)="logout()"
+      [disabled]="isLoading"
+    >
+      @if (isLoading) {
+        <span>Signing Out...</span>
+      } @else {
+        <span>Sign Out</span>
+      }
+    </button>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h1>Create Account</h1>
+      <p>Fill in your details to get started</p>
+    </div>
+
+    @if (errorMessage) {
+      <div class="error-message" role="alert">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input 
+        type="text"
+        id="username"
+        class="input-dark"
+        placeholder="Username123"
+        [(ngModel)]="username"
+        [disabled]="isLoading"
+        (keyup.enter)="register()"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input 
+        type="email"
+        id="email"
+        class="input-dark"
+        placeholder="you@example.com"
+        [(ngModel)]="email"
+        [disabled]="isLoading"
+        (keyup.enter)="register()"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input 
+        type="password"
+        id="password"
+        class="input-dark"
+        placeholder="••••••••"
+        [(ngModel)]="password"
+        [disabled]="isLoading"
+        (keyup.enter)="register()"
+      >
+    </div>
+
+    <button 
+      class="btn-primary-dark"
+      (click)="register()"
+      [disabled]="isLoading"
+    >
+      @if (isLoading) {
+        <span>Signing Up...</span>
+      } @else {
+        <span>Sign Up</span>
+      }
+    </button>
+
+    <div class="login-footer">
+      <p>Already have an account? <a href="/auth/login">Sign in</a></p>
+    </div>
+  </div>
+</div>
