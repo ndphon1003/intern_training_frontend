@@ -11,6 +11,12 @@ export const routes: Routes = [
     {path: 'auth/register', component: Register},
     {path: 'auth/logout', component: Logout},
     { 
+    path: 'product-management',
+    loadComponent: () =>
+        import('./features/product-management/product-management').then(m => m.ProductManagement),
+    canActivate: [authGuard]
+    },
+    { 
     path: 'profile',
     loadComponent: () =>
         import('./features/profile/profile').then(m => m.Profile),
