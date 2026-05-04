@@ -1,1 +1,88 @@
-<p>profile works!</p>
+<div class="profile-container">
+
+  <div class="profile-card">
+
+    <!-- Header -->
+    <div class="profile-header">
+
+      <!-- Avatar -->
+      <div class="avatar">
+        <img
+        *ngIf="userProfile?.avatarUrl; else fallbackAvatar"
+        [src]="userProfile?.avatarUrl"
+        alt="avatar"
+        />
+
+        <ng-template #fallbackAvatar>
+          <div class="avatar-fallback">
+            {{ authInfo?.username?.charAt(0)?.toUpperCase() }}
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- User Info -->
+      <div class="user-info">
+        <h2>{{ userProfile?.fullName || authInfo?.username }}</h2>
+        <p class="role-badge">{{ authInfo?.role }}</p>
+        <p class="email">{{ authInfo?.email }}</p>
+      </div>
+
+    </div>
+
+    <!-- Body -->
+    <div class="profile-body">
+
+      <div class="section-title">Profile Information</div>
+
+      <div class="info-grid">
+
+        <div class="info-item">
+          <label>Phone</label>
+          <span>{{ userProfile?.phoneNumber || 'N/A' }}</span>
+        </div>
+
+        <div class="info-item">
+          <label>Address</label>
+          <span>{{ userProfile?.address || 'N/A' }}</span>
+        </div>
+
+        <div class="info-item">
+          <label>City</label>
+          <span>{{ userProfile?.city || 'N/A' }}</span>
+        </div>
+
+        <div class="info-item">
+          <label>Country</label>
+          <span>{{ userProfile?.country || 'N/A' }}</span>
+        </div>
+
+        <div class="info-item full">
+          <label>Bio</label>
+          <span>{{ userProfile?.bio || 'No bio yet' }}</span>
+        </div>
+
+      </div>
+
+      <div class="meta">
+        <span>
+            Last updated:
+            {{ userProfile?.updatedAt ? (userProfile?.updatedAt | date:'medium') : 'N/A' }}
+        </span>
+      </div>
+
+    </div>
+
+    <!-- Actions -->
+    <div class="profile-actions">
+      <button class="btn-secondary-dark">
+        Edit Profile
+      </button>
+
+      <button class="btn-danger-dark" (click)="logout()">
+        Logout
+      </button>
+    </div>
+
+  </div>
+
+</div>
