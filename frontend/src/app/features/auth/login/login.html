@@ -1,0 +1,59 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <h1>Welcome Back</h1>
+      <p>Enter your credentials to access your profile</p>
+    </div>
+
+    <!-- Error Message Display -->
+    @if (errorMessage) {
+      <div class="error-message" role="alert">
+        {{ errorMessage }}
+      </div>
+    }
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input 
+        type="text" 
+        id="username" 
+        class="input-dark" 
+        placeholder="Username123"
+        [(ngModel)]="username"
+        [disabled]="isLoading"
+        (keyup.enter)="login()"
+        (input)="onInputChange()"
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input 
+        type="password" 
+        id="password" 
+        class="input-dark" 
+        placeholder="••••••••"
+        [(ngModel)]="password"
+        [disabled]="isLoading"
+        (keyup.enter)="login()"
+        (input)="onInputChange()"
+      >
+    </div>
+
+    <button 
+      class="btn-primary-dark" 
+      (click)="login()"
+      [disabled]="isLoading"
+    >
+      @if (isLoading) {
+        <span>Signing In...</span>
+      } @else {
+        <span>Sign In</span>
+      }
+    </button>
+
+    <div class="login-footer">
+      <p>Don't have an account? <a href="/auth/register">Create one</a></p>
+    </div>
+  </div>
+</div>
