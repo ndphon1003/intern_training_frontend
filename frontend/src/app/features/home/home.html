@@ -14,7 +14,7 @@
   <!-- GRID -->
   <div class="grid" *ngIf="!loading">
 
-    <div class="card" *ngFor="let p of products">
+    <div class="card" *ngFor="let p of products" (click)="goToDetail(p.product_id)">
 
       <div class="badge">NEW</div>
 

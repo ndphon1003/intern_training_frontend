@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class Home {
 
   private api = inject(ApiService);
   private cdr = inject(ChangeDetectorRef);
+  private router = inject(Router);
 
   products: any[] = [];
   loading = false;
@@ -22,16 +24,20 @@ export class Home {
     this.load();
   }
 
+  goToDetail(id: string) {
+    this.router.navigate(['/product', id]);
+  }
+
   load() {
     this.loading = true;
-    this.cdr.markForCheck(); // báo Angular cần check UI
+    this.cdr.markForCheck(); 
 
     this.api.getProducts().subscribe({
       next: (res: any) => {
         this.products = res?.data?.listProduct || [];
         this.loading = false;
 
-        this.cdr.detectChanges(); // ép render ngay
+        this.cdr.detectChanges(); 
       },
       error: (err) => {
         console.error('Load products error:', err);
