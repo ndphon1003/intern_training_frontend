@@ -19,10 +19,10 @@ export class UserService {
             'Content-Type': 'application/json',
             'X-Internal-Key': this.SECRET_KEY,
         }; 
-        let token: string | null= this.authService.getToken();
-        if (token) {
-            headers['Authorization'] = `Bearer ${token}`;
-        }
+        // const token = this.authService.getToken();
+        // if (token) {
+        //     headers['Authorization'] = `Bearer ${token}`;
+        // }
 
         return this.http.get<ProfileResponse>(
             `${this.API_URL}/profile`,
@@ -36,12 +36,12 @@ export class UserService {
             'X-Internal-Key': this.SECRET_KEY,
         };
 
-        const token = this.authService.getToken();
+        // const token = this.authService.getToken();
         const userId = localStorage.getItem('userId');
 
-        if (token) {
-            headers['Authorization'] = `Bearer ${token}`;
-        }
+        // if (token) {
+        //     headers['Authorization'] = `Bearer ${token}`;
+        // }
 
         if (userId) {
             headers['X-User-Id'] = userId;

@@ -57,7 +57,7 @@ export class AuthService {
           console.log("longin fail in service");
         }
         console.log("login 2")
-        throw throwError(() => error);
+        return throwError(() => error);
       })
     );
   }

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { UserInformation } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
@@ -18,6 +19,7 @@ export class Profile implements OnInit {
   private authService = inject(AuthService);
   private userService = inject(UserService);
   private cdr = inject(ChangeDetectorRef);
+  private router = inject(Router);
 
   // State management
   userProfile: UserInformation['userProfile'] | null = null;
@@ -60,7 +62,18 @@ export class Profile implements OnInit {
       }
     } catch (error: any) {
       console.error('Load profile error:', error);
-      this.errorMessage = error?.message || 'Failed to load profile. Please try again.';
+      
+      // Handle 401 Unauthorized - token invalid or expired
+      if (error.status === 401) {
+        this.errorMessage = 'Your session has expired. Please login again.';
+        this.authService.logout();
+        // Redirect to login after a short delay
+        setTimeout(() => {
+          this.router.navigate(['/auth/login']);
+        }, 2000);
+      } else {
+        this.errorMessage = error?.error?.message || error?.message || 'Failed to load profile. Please try again.';
+      }
     } finally {
       this.isLoading = false;
       this.cdr.markForCheck();
@@ -141,7 +154,18 @@ export class Profile implements OnInit {
       this.isEditing = false;
     } catch (error: any) {
       console.error('Save profile error:', error);
-      this.errorMessage = error?.message || 'Failed to save profile. Please try again.';
+      
+      // Handle 401 Unauthorized - token invalid or expired
+      if (error.status === 401) {
+        this.errorMessage = 'Your session has expired. Please login again.';
+        this.authService.logout();
+        // Redirect to login after a short delay
+        setTimeout(() => {
+          this.router.navigate(['/auth/login']);
+        }, 2000);
+      } else {
+        this.errorMessage = error?.error?.message || error?.message || 'Failed to save profile. Please try again.';
+      }
     } finally {
       this.isSaving = false;
       this.cdr.markForCheck();
@@ -153,6 +177,6 @@ export class Profile implements OnInit {
    */
   logout() {
     this.authService.logout();
-    window.location.href = '/auth/login';
+    this.router.navigate(['/auth/login']);
   }
 }
