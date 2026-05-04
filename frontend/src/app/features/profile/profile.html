@@ -1,30 +1,57 @@
 <div class="profile-container">
 
-  <div class="profile-card">
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading profile...</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="error-message" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="success-message" role="status">
+    {{ successMessage }}
+  </div>
+
+  <!-- Profile Card -->
+  <div class="profile-card" *ngIf="!isLoading">
 
     <!-- Header -->
     <div class="profile-header">
 
-      <!-- Avatar -->
       <div class="avatar">
         <img
-        *ngIf="userProfile?.avatarUrl; else fallbackAvatar"
-        [src]="userProfile?.avatarUrl"
-        alt="avatar"
+          *ngIf="userProfile?.avatarUrl; else fallbackAvatar"
+          [src]="userProfile?.avatarUrl"
+          alt="avatar"
         />
 
         <ng-template #fallbackAvatar>
           <div class="avatar-fallback">
-            {{ authInfo?.username?.charAt(0)?.toUpperCase() }}
+            {{ authInfo?.username?.charAt(0)?.toUpperCase() || 'U' }}
           </div>
         </ng-template>
       </div>
 
-      <!-- User Info -->
       <div class="user-info">
-        <h2>{{ userProfile?.fullName || authInfo?.username }}</h2>
-        <p class="role-badge">{{ authInfo?.role }}</p>
-        <p class="email">{{ authInfo?.email }}</p>
+
+        <h2 *ngIf="!isEditing">
+          {{ userProfile?.fullName || authInfo?.username || 'User' }}
+        </h2>
+
+        <input
+          *ngIf="isEditing"
+          class="input-dark"
+          [(ngModel)]="userProfile!.fullName"
+          [disabled]="isSaving"
+        />
+
+        <p class="role-badge">{{ authInfo?.role || 'N/A' }}</p>
+        <p class="email">{{ authInfo?.email || 'N/A' }}</p>
+
       </div>
 
     </div>
@@ -38,35 +65,85 @@
 
         <div class="info-item">
           <label>Phone</label>
-          <span>{{ userProfile?.phoneNumber || 'N/A' }}</span>
+
+          <span *ngIf="!isEditing">
+            {{ userProfile?.phoneNumber || 'N/A' }}
+          </span>
+
+          <input 
+            *ngIf="isEditing" 
+            class="input-dark"
+            [(ngModel)]="userProfile!.phoneNumber"
+            [disabled]="isSaving"
+          />
         </div>
 
         <div class="info-item">
           <label>Address</label>
-          <span>{{ userProfile?.address || 'N/A' }}</span>
+
+          <span *ngIf="!isEditing">
+            {{ userProfile?.address || 'N/A' }}
+          </span>
+
+          <input 
+            *ngIf="isEditing" 
+            class="input-dark"
+            [(ngModel)]="userProfile!.address"
+            [disabled]="isSaving"
+          />
         </div>
 
         <div class="info-item">
           <label>City</label>
-          <span>{{ userProfile?.city || 'N/A' }}</span>
+
+          <span *ngIf="!isEditing">
+            {{ userProfile?.city || 'N/A' }}
+          </span>
+
+          <input 
+            *ngIf="isEditing" 
+            class="input-dark"
+            [(ngModel)]="userProfile!.city"
+            [disabled]="isSaving"
+          />
         </div>
 
         <div class="info-item">
           <label>Country</label>
-          <span>{{ userProfile?.country || 'N/A' }}</span>
+
+          <span *ngIf="!isEditing">
+            {{ userProfile?.country || 'N/A' }}
+          </span>
+
+          <input 
+            *ngIf="isEditing" 
+            class="input-dark"
+            [(ngModel)]="userProfile!.country"
+            [disabled]="isSaving"
+          />
         </div>
 
         <div class="info-item full">
           <label>Bio</label>
-          <span>{{ userProfile?.bio || 'No bio yet' }}</span>
+
+          <span *ngIf="!isEditing">
+            {{ userProfile?.bio || 'No bio yet' }}
+          </span>
+
+          <textarea 
+            *ngIf="isEditing" 
+            class="input-dark"
+            [(ngModel)]="userProfile!.bio"
+            [disabled]="isSaving"
+          ></textarea>
         </div>
 
       </div>
 
       <div class="meta">
         <span>
-            Last updated:
-            {{ userProfile?.updatedAt ? (userProfile?.updatedAt | date:'medium') : 'N/A' }}
+          Last updated:
+          {{ userProfile?.updatedAt ? (userProfile?.updatedAt | date:'medium') : 'N/A' }}
         </span>
       </div>
 
@@ -74,13 +151,42 @@
 
     <!-- Actions -->
     <div class="profile-actions">
-      <button class="btn-secondary-dark">
+
+      <button
+        class="btn-secondary-dark"
+        *ngIf="!isEditing"
+        (click)="enableEdit()"
+        [disabled]="isLoading"
+      >
         Edit Profile
       </button>
 
-      <button class="btn-danger-dark" (click)="logout()">
+      <button
+        class="btn-primary-dark"
+        *ngIf="isEditing"
+        (click)="saveProfile()"
+        [disabled]="isSaving"
+      >
+        @if (isSaving) {
+          <span>Saving...</span>
+        } @else {
+          <span>Save Changes</span>
+        }
+      </button>
+
+      <button
+        class="btn-secondary-dark"
+        *ngIf="isEditing"
+        (click)="cancelEdit()"
+        [disabled]="isSaving"
+      >
+        Cancel
+      </button>
+
+      <button class="btn-danger-dark" (click)="logout()" [disabled]="isSaving">
         Logout
       </button>
+
     </div>
 
   </div>

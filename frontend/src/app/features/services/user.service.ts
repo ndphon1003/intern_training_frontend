@@ -29,4 +29,37 @@ export class UserService {
             { headers }
         );
     }
+
+    updateProfile(body: any): Observable<ProfileResponse> {
+        const headers: any = {
+            'Content-Type': 'application/json',
+            'X-Internal-Key': this.SECRET_KEY,
+        };
+
+        const token = this.authService.getToken();
+        const userId = localStorage.getItem('userId');
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        if (userId) {
+            headers['X-User-Id'] = userId;
+        }
+
+        const payload = {
+            fullName: body.fullName ?? null,
+            phoneNumber: body.phoneNumber ?? null,
+            bio: body.bio ?? null,
+            address: body.address ?? null,
+            city: body.city ?? null,
+            country: body.country ?? null,
+        };
+
+        return this.http.patch<ProfileResponse>(
+            `${this.API_URL}/update-profile`,
+            payload,
+            { headers }
+        );
+    }
 }
