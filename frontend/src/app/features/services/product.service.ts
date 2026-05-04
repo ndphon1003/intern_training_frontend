@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { Observable } from "rxjs";
-import { CreateProductRequest, CreateProductResponse, GetOwnProductResponse, GetProductDetailResponse } from "../models/product.model";
+import { CreateProductRequest, CreateProductResponse, GetOwnProductResponse, GetProductDetailResponse, UpdateProductRequest } from "../models/product.model";
 import { AuthService } from "./auth.service";
 
 @Injectable({ providedIn: 'root' })
@@ -43,19 +43,32 @@ export class ProductService {
     }
 
     getProductDetail(productId: string): Observable<GetProductDetailResponse> {
-    const headers: any = {
-        'Content-Type': 'application/json',
-        'X-Internal-Key': this.SECRET_KEY,
-    };
+        const headers: any = {
+            'Content-Type': 'application/json',
+            'X-Internal-Key': this.SECRET_KEY,
+        };
 
-    return this.http.get<GetProductDetailResponse>(
-        `${this.API_URL}/detail-public-product`,
-        {
-        headers,
-        params: {
-            'Product-Id': productId,
-        },
-        }
+        return this.http.get<GetProductDetailResponse>(
+            `${this.API_URL}/detail-public-product`,
+            {
+            headers,
+            params: {
+                'Product-Id': productId,
+            },
+            }
     );
+    }
+
+    updateProduct(body: UpdateProductRequest): Observable<GetProductDetailResponse> {
+        const headers: any = {
+            'Content-Type': 'application/json',
+            'X-Internal-Key': this.SECRET_KEY,
+        };
+
+        return this.http.patch<GetProductDetailResponse>(
+            `${this.API_URL}/update-product`,
+            body,
+            { headers }
+        );
     }
 }

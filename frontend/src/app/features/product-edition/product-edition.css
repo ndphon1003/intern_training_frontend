@@ -183,3 +183,106 @@
   padding: 12px;
   border-radius: 10px;
 }
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-edit,
+.btn-save,
+.btn-cancel {
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--bg-tertiary);
+  color: white;
+}
+
+.btn-save {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-edit:hover,
+.btn-save:hover,
+.btn-cancel:hover {
+  border-color: var(--accent);
+}
+
+.actions-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* INPUT FIXED UI */
+.input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+
+  background: rgba(28,31,42,0.8);
+  border: 1px solid rgba(255,255,255,0.08);
+
+  color: var(--text-primary);
+  font-size: 13px;
+
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* focus state = SaaS feel */
+.input:focus {
+  border-color: var(--accent);
+  background: rgba(28,31,42,1);
+}
+
+/* small input inside kv row */
+.kv .input {
+  max-width: 160px;
+  padding: 6px 8px;
+}
+
+/* checkbox alignment fix */
+.kv input[type="checkbox"] {
+  transform: scale(1.1);
+  accent-color: var(--accent);
+}
+
+/* better kv spacing when editing */
+.kv {
+  align-items: center;
+}
+
+/* BUTTON polish */
+.btn-edit,
+.btn-save,
+.btn-cancel {
+  padding: 7px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+
+  font-size: 13px;
+  transition: 0.2s ease;
+}
+
+.btn-save {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-edit:hover,
+.btn-save:hover,
+.btn-cancel:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}

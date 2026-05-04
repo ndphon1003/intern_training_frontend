@@ -2,24 +2,23 @@
 
   <!-- HEADER -->
   <div class="pe-header">
+
     <button class="btn-back" (click)="goBack()">← Back</button>
 
     <div class="title-group">
-      <h2>{{ product?.name || 'Product Detail' }}</h2>
-      <span class="sub">
-        Version v{{ product?.currentVersion }}
-      </span>
+      <h2>{{ product?.name }}</h2>
+      <span class="sub">Version v{{ product?.currentVersion }}</span>
     </div>
 
     <span class="badge" [class.public]="product?.public">
       {{ product?.public ? 'Public' : 'Private' }}
     </span>
+
   </div>
 
   <!-- LOADING -->
   <div *ngIf="isLoading" class="loading">
-    <div class="spinner"></div>
-    <p>Loading product...</p>
+    Loading...
   </div>
 
   <!-- ERROR -->
@@ -37,39 +36,110 @@
 
       <div class="block">
         <div class="label">Description</div>
-        <div class="value">{{ product.description }}</div>
+
+        <div *ngIf="!isEditMode" class="value">
+          {{ product.description }}
+        </div>
+
+        <textarea
+          *ngIf="isEditMode"
+          class="input"
+          formControlName="description"
+          [formControl]="form.controls.description"
+        ></textarea>
+
       </div>
 
       <div class="block highlight">
         <div class="label">Price</div>
-        <div class="value price">
+
+        <div *ngIf="!isEditMode" class="value price">
           {{ product.price | number }} ₫
         </div>
+
+        <input
+          *ngIf="isEditMode"
+          type="number"
+          class="input"
+          [formControl]="form.controls.price"
+        />
+
       </div>
 
     </div>
 
-    <!-- RIGHT -->
-    <div class="panel side">
+<!-- RIGHT -->
+<div class="panel side">
 
-      <div class="section-title">Details</div>
+  <div class="section-title">Details</div>
 
-      <div class="kv">
-        <span>Stock</span>
-        <b>{{ product.stockQuantity }}</b>
-      </div>
+  <div class="kv">
+    <span>Name</span>
 
-      <div class="kv">
-        <span>Created</span>
-        <b>{{ product.createdAt | date:'short' }}</b>
-      </div>
+    <b *ngIf="!isEditMode">{{ product.name }}</b>
 
-      <div class="kv">
-        <span>Updated</span>
-        <b>{{ product.updatedAt | date:'short' }}</b>
-      </div>
+    <input
+      *ngIf="isEditMode"
+      class="input"
+      [formControl]="form.controls.name"
+    />
+  </div>
 
-    </div>
+  <div class="kv">
+    <span>Public</span>
+
+    <b *ngIf="!isEditMode">
+      {{ product.public ? 'Yes' : 'No' }}
+    </b>
+
+    <input
+      *ngIf="isEditMode"
+      type="checkbox"
+      [formControl]="form.controls.public"
+    />
+  </div>
+
+  <div class="kv">
+    <span>Stock</span>
+    <b>{{ product.stockQuantity }}</b>
+  </div>
+
+  <div class="kv">
+    <span>Created</span>
+    <b>{{ product.createdAt | date:'short' }}</b>
+  </div>
+
+  <!-- ACTION BUTTONS (MOVE HERE) -->
+  <div class="actions-footer">
+
+    <button
+      *ngIf="!isEditMode"
+      class="btn-edit"
+      (click)="enableEdit()"
+    >
+      Edit
+    </button>
+
+    <button
+      *ngIf="isEditMode"
+      class="btn-cancel"
+      (click)="cancelEdit()"
+    >
+      Cancel
+    </button>
+
+    <button
+      *ngIf="isEditMode"
+      class="btn-save"
+      (click)="submitUpdate()"
+      [disabled]="isSaving"
+    >
+      {{ isSaving ? 'Saving...' : 'Save' }}
+    </button>
+
+  </div>
+
+</div>
 
   </div>
 

@@ -39,3 +39,12 @@ export interface GetProductDetailResponse {
   message: string;
   data: Product;
 }
+
+export interface UpdateProductRequest {
+  productId: string;
+  name: string;
+  description: string;
+  price: number;
+  public: boolean;
+  deleted: boolean;
+}
