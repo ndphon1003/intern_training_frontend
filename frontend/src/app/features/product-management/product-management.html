@@ -3,12 +3,21 @@
   <!-- Header -->
     <div class="pm-header">
 
-    <div class="left-header">
-        <button class="btn-back" (click)="goBack()">← Back</button>
-        <h2>My Products</h2>
-    </div>
+        <div class="left-header">
+            <button class="btn-back" (click)="goBack()">← Back</button>
+            <h2>My Products</h2>
+        </div>
 
-    <span class="count">{{ totalProduct }} items</span>
+        <div class="right-header">
+            <span class="count">{{ totalProduct }} items</span>
+
+            <button
+            class="btn-primary-dark"
+            (click)="goToCreateProduct()"
+            >
+            + Create Product
+            </button>
+        </div>
 
     </div>
 

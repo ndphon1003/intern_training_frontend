@@ -60,4 +60,7 @@ export class ProductManagement implements OnInit {
   goBack() {
     this.router.navigate(['/profile']);
   }
+  goToCreateProduct() {
+    this.router.navigate(['/product-creation']);
+  }
 }
