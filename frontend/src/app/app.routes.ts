@@ -23,6 +23,12 @@ export const routes: Routes = [
     canActivate: [authGuard]
     },
     { 
+    path: 'product-edition/:id',
+    loadComponent: () =>
+        import('./features/product-edition/product-edition').then(m => m.ProductEdition),
+    canActivate: [authGuard]
+    },
+    { 
     path: 'profile',
     loadComponent: () =>
         import('./features/profile/profile').then(m => m.Profile),

@@ -40,7 +40,9 @@
   <!-- LIST -->
   <div class="product-list" *ngIf="!isLoading && products.length">
 
-    <div class="product-item" *ngFor="let p of products">
+    <div class="product-item"
+     *ngFor="let p of products"
+     (click)="goToProductDetail(p.product_id)">
 
       <div class="left">
         <div class="name">{{ p.name }}</div>

@@ -33,3 +33,9 @@ export interface CreateProductResponse {
   message: string;
   data: any; 
 }
+
+export interface GetProductDetailResponse {
+  code: number;
+  message: string;
+  data: Product;
+}

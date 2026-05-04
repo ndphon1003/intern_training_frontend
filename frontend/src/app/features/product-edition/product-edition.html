@@ -1,0 +1,76 @@
+<div class="pe-container">
+
+  <!-- HEADER -->
+  <div class="pe-header">
+    <button class="btn-back" (click)="goBack()">← Back</button>
+
+    <div class="title-group">
+      <h2>{{ product?.name || 'Product Detail' }}</h2>
+      <span class="sub">
+        Version v{{ product?.currentVersion }}
+      </span>
+    </div>
+
+    <span class="badge" [class.public]="product?.public">
+      {{ product?.public ? 'Public' : 'Private' }}
+    </span>
+  </div>
+
+  <!-- LOADING -->
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading product...</p>
+  </div>
+
+  <!-- ERROR -->
+  <div *ngIf="errorMessage" class="error-box">
+    {{ errorMessage }}
+  </div>
+
+  <!-- CONTENT -->
+  <div *ngIf="!isLoading && product" class="grid">
+
+    <!-- LEFT -->
+    <div class="panel main">
+
+      <div class="section-title">Overview</div>
+
+      <div class="block">
+        <div class="label">Description</div>
+        <div class="value">{{ product.description }}</div>
+      </div>
+
+      <div class="block highlight">
+        <div class="label">Price</div>
+        <div class="value price">
+          {{ product.price | number }} ₫
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="panel side">
+
+      <div class="section-title">Details</div>
+
+      <div class="kv">
+        <span>Stock</span>
+        <b>{{ product.stockQuantity }}</b>
+      </div>
+
+      <div class="kv">
+        <span>Created</span>
+        <b>{{ product.createdAt | date:'short' }}</b>
+      </div>
+
+      <div class="kv">
+        <span>Updated</span>
+        <b>{{ product.updatedAt | date:'short' }}</b>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

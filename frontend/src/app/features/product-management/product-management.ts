@@ -63,4 +63,7 @@ export class ProductManagement implements OnInit {
   goToCreateProduct() {
     this.router.navigate(['/product-creation']);
   }
+  goToProductDetail(productId: string) {
+    this.router.navigate(['/product-edition', productId]);
+  }
 }

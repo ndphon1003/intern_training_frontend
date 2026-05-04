@@ -1,0 +1,185 @@
+:root {
+  --bg-primary: #0f1115;
+  --bg-secondary: #151821;
+  --bg-tertiary: #1c1f2a;
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,0.7);
+  --text-muted: rgba(255,255,255,0.5);
+
+  --accent: #4dabf7;
+}
+
+/* FIX GLOBAL BACKGROUND (QUAN TRỌNG NHẤT) */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+/* CONTAINER */
+.pe-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 16px;
+  color: var(--text-primary);
+}
+
+/* HEADER (dark giống list page) */
+.pe-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 24px;
+  padding: 14px 18px;
+
+  background: var(--bg-secondary);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+}
+
+.title-group h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+}
+
+/* PANEL */
+.panel {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+/* SECTION */
+.section-title {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* BLOCK */
+.block {
+  padding: 14px;
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.highlight {
+  border-left: 3px solid var(--accent);
+}
+
+/* TEXT */
+.label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.value {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.price {
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* RIGHT KV */
+.kv {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.kv:last-child {
+  border-bottom: none;
+}
+
+.kv span {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.kv b {
+  font-size: 13px;
+}
+
+/* BADGE */
+.badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+
+  background: var(--bg-tertiary);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.badge.public {
+  background: rgba(77,171,247,0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* BACK BUTTON */
+.btn-back {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-back:hover {
+  border-color: var(--accent);
+}
+
+/* LOADING */
+.loading {
+  text-align: center;
+  padding: 60px;
+  color: var(--text-muted);
+}
+
+.spinner {
+  width: 26px;
+  height: 26px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top: 3px solid var(--accent);
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ERROR */
+.error-box {
+  background: rgba(255,0,0,0.08);
+  border: 1px solid rgba(255,0,0,0.2);
+  color: #ff6b6b;
+  padding: 12px;
+  border-radius: 10px;
+}
