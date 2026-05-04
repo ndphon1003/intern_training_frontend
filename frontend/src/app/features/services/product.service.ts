@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { Observable } from "rxjs";
-import { GetOwnProductResponse } from "../models/product.model";
+import { CreateProductRequest, CreateProductResponse, GetOwnProductResponse } from "../models/product.model";
 import { AuthService } from "./auth.service";
 
 @Injectable({ providedIn: 'root' })
@@ -25,6 +25,19 @@ export class ProductService {
 
         return this.http.get<GetOwnProductResponse>(
             `${this.API_URL}/get-own`,
+            { headers }
+        );
+    }
+
+    createProduct(body: CreateProductRequest): Observable<CreateProductResponse> {
+        const headers: any = {
+            'Content-Type': 'application/json',
+            'X-Internal-Key': this.SECRET_KEY,
+        };
+
+        return this.http.post<CreateProductResponse>(
+            `${this.API_URL}/create`,
+            body,
             { headers }
         );
     }
