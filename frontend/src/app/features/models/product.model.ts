@@ -20,3 +20,16 @@ export interface GetOwnProductResponse {
     listProduct: Product[];
   };
 }
+
+export interface CreateProductRequest {
+  name: string;
+  description: string;
+  price: number;
+  stockQuantity: number;
+}
+
+export interface CreateProductResponse {
+  code: number;
+  message: string;
+  data: any; 
+}
