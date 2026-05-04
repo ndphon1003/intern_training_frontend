@@ -7,8 +7,15 @@ const TOKEN_KEY = 'token';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const platformId = inject(PLATFORM_ID);
 
-  // Bypass /auth/**
-  if (req.url.includes('/auth/')) {
+  const url = req.url;
+
+  // Bypass đúng API này
+  if (url.includes('/api/product/list')) {
+    return next(req);
+  }
+
+  // Bypass auth API
+  if (url.includes('/auth/')) {
     return next(req);
   }
 
@@ -22,15 +29,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
 
-  const newReq = req.clone({
-    setHeaders: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-
-console.log('platform:', typeof window);
-console.log('token:', token);
-console.log('url:', req.url);
-
-  return next(newReq);
+  return next(
+    req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  );
 };
