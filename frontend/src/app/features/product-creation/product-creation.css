@@ -1,0 +1,121 @@
+:root {
+  --bg-primary: #0f1115;
+  --bg-secondary: #151821;
+  --bg-tertiary: #1c1f2a;
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,0.7);
+  --text-muted: rgba(255,255,255,0.5);
+
+  --accent: #4dabf7;
+  --accent-hover: #74c0fc;
+}
+
+/* layout */
+.pc-container {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 24px;
+}
+
+/* header */
+.pc-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* card */
+.form-card {
+  max-width: 500px;
+  background: var(--bg-secondary);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* form */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+label {
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+}
+
+/* input */
+.input-dark {
+  background: var(--bg-tertiary);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.input-dark:focus {
+  border-color: var(--accent);
+}
+
+/* error */
+.error {
+  color: #ff6b6b;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+.error.global {
+  margin-top: 10px;
+}
+
+/* buttons */
+.btn-primary-dark {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-primary-dark:hover {
+  background: var(--accent-hover);
+}
+
+.btn-primary-dark:active {
+  transform: scale(0.98);
+}
+
+.btn-primary-dark:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-secondary-dark {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-secondary-dark:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* actions */
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}

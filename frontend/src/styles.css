@@ -26,3 +26,10 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: var(--text-primary);
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #0f1115;
+  color: white;
+}
