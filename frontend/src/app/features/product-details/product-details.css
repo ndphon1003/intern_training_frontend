@@ -1,0 +1,149 @@
+:root {
+  --bg-primary: #0f1115;
+  --bg-secondary: #151821;
+  --bg-tertiary: #1c1f2a;
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255,255,255,0.7);
+
+  --accent: #4dabf7;
+  --accent-hover: #74c0fc;
+}
+
+/* PAGE */
+.detail-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding: 40px;
+  color: var(--text-primary);
+}
+
+/* BACK BUTTON */
+.back-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+/* CARD */
+.card {
+  background: var(--bg-secondary);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 14px;
+  padding: 24px;
+  max-width: 700px;
+  margin: auto;
+  transition: 0.2s ease;
+}
+
+/* BADGE */
+.badge {
+  display: inline-block;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(77, 171, 247, 0.15);
+  color: var(--accent);
+}
+
+/* TITLE (FIXED GRADIENT) */
+.title {
+  margin: 8px 0;
+  font-size: 28px;
+  font-weight: 700;
+
+  background: linear-gradient(90deg, #4dabf7, #b197fc, #74c0fc);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: gradientMove 6s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* DESC */
+.desc {
+  color: var(--text-secondary);
+  margin: 12px 0;
+}
+
+/* PRICE */
+.price {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--accent);
+  margin: 16px 0;
+}
+
+/* GRID INFO */
+.grid-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.info-box {
+  background: var(--bg-tertiary);
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: 0.2s ease;
+}
+
+.info-box:hover {
+  transform: translateY(-2px);
+  border-color: rgba(77,171,247,0.3);
+}
+
+.label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.value {
+  font-size: 13px;
+  color: white;
+  word-break: break-word;
+}
+
+/* BUTTON */
+.buy-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.buy-btn:hover {
+  background: var(--accent-hover);
+}
+
+.buy-btn:active {
+  transform: scale(0.98);
+}
+
+/* LOADING */
+.loading {
+  text-align: center;
+  color: var(--text-secondary);
+}

@@ -1,0 +1,58 @@
+<div class="detail-page">
+
+  <!-- BACK BUTTON -->
+  <button class="back-btn" (click)="goBack()">
+    ← Back
+  </button>
+
+  <!-- LOADING -->
+  <div class="loading" *ngIf="loading">
+    Loading product details...
+  </div>
+
+  <!-- PRODUCT -->
+  <div class="card" *ngIf="!loading && product">
+
+    <div class="badge">PUBLIC</div>
+
+    <h1 class="title">{{ product.name }}</h1>
+
+    <p class="desc">{{ product.description }}</p>
+
+    <div class="price">
+      {{ formatPrice(product.price) }}
+    </div>
+
+    <div class="grid-info">
+
+      <div class="info-box">
+        <span class="label">Stock</span>
+        <span class="value">{{ product.stockQuantity }}</span>
+      </div>
+
+      <div class="info-box">
+        <span class="label">Version</span>
+        <span class="value">{{ product.currentVersion }}</span>
+      </div>
+
+      <div class="info-box">
+        <span class="label">Created</span>
+        <span class="value">{{ product.createdAt | date:'short' }}</span>
+      </div>
+
+      <div class="info-box">
+        <span class="label">Status</span>
+        <span class="value">
+          {{ product.public ? 'Public' : 'Private' }}
+        </span>
+      </div>
+
+    </div>
+
+    <button class="buy-btn">
+      Buy now
+    </button>
+
+  </div>
+
+</div>

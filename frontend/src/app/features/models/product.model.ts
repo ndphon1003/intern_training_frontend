@@ -1,4 +1,7 @@
+
+
 export interface Product {
+  product_id: string;
   name: string;
   description: string;
   price: number;
@@ -9,6 +12,9 @@ export interface Product {
   updatedAt: string;
   public: boolean;
   deleted: boolean;
+}
+
+export interface ProductListResponse {
   product_id: string;
 }
 
