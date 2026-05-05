@@ -22,21 +22,7 @@
     <div class="price">
       {{ formatPrice(product.price) }}
     </div>
-    <div class="qty-box">
 
-      <label>Quantity</label>
-
-      <div class="qty-control">
-
-        <button (click)="quantity = quantity - 1" [disabled]="quantity <= 1">-</button>
-
-        <span>{{ quantity }}</span>
-
-        <button (click)="quantity = quantity + 1">+</button>
-
-      </div>
-
-    </div>
     <div class="grid-info">
 
       <div class="info-box">
@@ -63,20 +49,10 @@
 
     </div>
 
-    <div class="action-buttons">
+    <button class="buy-btn">
+      Buy now
+    </button>
 
-      <button class="cart-btn" (click)="addToCart()">
-        Add to cart
-      </button>
-
-      <button class="buy-btn">
-        Buy now
-      </button>
-
-    </div>
-    <div class="toast-success" *ngIf="successMessage">
-      {{ successMessage }}
-    </div>
   </div>
 
 </div>

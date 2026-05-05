@@ -159,47 +159,41 @@
             >
             My Product
         </button>
-        <button
-          class="btn-primary-dark"
-          (click)="goToCart()"
-        >
-          My Cart
-        </button>
 
-        <button
-          class="btn-secondary-dark"
-          *ngIf="!isEditing"
-          (click)="enableEdit()"
-          [disabled]="isLoading"
-        >
-          Edit Profile
-        </button>
+      <button
+        class="btn-secondary-dark"
+        *ngIf="!isEditing"
+        (click)="enableEdit()"
+        [disabled]="isLoading"
+      >
+        Edit Profile
+      </button>
 
-        <button
-          class="btn-primary-dark"
-          *ngIf="isEditing"
-          (click)="saveProfile()"
-          [disabled]="isSaving"
-        >
-          @if (isSaving) {
-            <span>Saving...</span>
-          } @else {
-            <span>Save Changes</span>
-          }
-        </button>
+      <button
+        class="btn-primary-dark"
+        *ngIf="isEditing"
+        (click)="saveProfile()"
+        [disabled]="isSaving"
+      >
+        @if (isSaving) {
+          <span>Saving...</span>
+        } @else {
+          <span>Save Changes</span>
+        }
+      </button>
 
-        <button
-          class="btn-secondary-dark"
-          *ngIf="isEditing"
-          (click)="cancelEdit()"
-          [disabled]="isSaving"
-        >
-          Cancel
-        </button>
+      <button
+        class="btn-secondary-dark"
+        *ngIf="isEditing"
+        (click)="cancelEdit()"
+        [disabled]="isSaving"
+      >
+        Cancel
+      </button>
 
-        <button class="btn-danger-dark" (click)="logout()" [disabled]="isSaving">
-          Logout
-        </button>
+      <button class="btn-danger-dark" (click)="logout()" [disabled]="isSaving">
+        Logout
+      </button>
 
     </div>
 

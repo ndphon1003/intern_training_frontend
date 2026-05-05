@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CartService } from '../services/cart.service';
 import { ProductService } from '../services/product.service';
 
 @Component({
@@ -18,12 +17,10 @@ export class ProductDetails {
   private router = inject(Router);
   private productService = inject(ProductService);
   private cdr = inject(ChangeDetectorRef);
-  private cartService = inject(CartService);
 
   product: any = null;
   loading = false;
-  quantity = 1;
-  successMessage = '';
+
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
 
@@ -59,26 +56,5 @@ export class ProductDetails {
 
   goBack() {
     this.router.navigate(['/']);
-  }
-  addToCart() {
-    if (!this.product) return;
-
-    this.cartService.addToCart({
-      productId: this.product.product_id,
-      quantity: this.quantity
-    }).subscribe({
-      next: () => {
-        this.successMessage = 'Added to cart successfully!';
-        this.cdr.detectChanges();
-
-        setTimeout(() => {
-          this.successMessage = '';
-          this.cdr.detectChanges();
-        }, 2000);
-      },
-      error: (err) => {
-        console.error('Add to cart failed', err);
-      }
-    });
   }
 }
