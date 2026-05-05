@@ -1,0 +1,61 @@
+<div class="cart-container">
+
+  <div class="cart-header">
+
+    <div>
+      <h2>My Cart</h2>
+      <p class="sub-text">You have {{ totalItems }} items in your cart</p>
+    </div>
+
+    <button class="btn-secondary-dark" (click)="goBack()">
+      Back
+    </button>
+
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    Loading cart...
+  </div>
+
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="!isLoading && cartView.length === 0" class="empty">
+    Your cart is empty
+  </div>
+
+  <div class="cart-grid" *ngIf="cartView.length > 0">
+
+    <div class="cart-card" *ngFor="let item of cartView">
+
+      <div class="cart-info">
+
+        <div class="product-icon">🛒</div>
+
+        <div class="details">
+          <h3>{{ item.productName }}</h3>
+        </div>
+
+      </div>
+
+      <div class="cart-meta">
+
+        <div class="qty">
+          Qty: {{ item.quantity }}
+        </div>
+
+        <div class="date">
+          {{ item.addAt | date:'short' }}
+        </div>
+
+        <button class="remove-btn" (click)="removeCart(item.id)">
+            Remove
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
