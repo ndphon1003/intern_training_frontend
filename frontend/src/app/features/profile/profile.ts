@@ -187,4 +187,7 @@ export class Profile implements OnInit {
     this.authService.logout();
     this.router.navigate(['/auth/login']);
   }
+  goToCart() {
+    this.router.navigate(['/cart']);
+  }
 }

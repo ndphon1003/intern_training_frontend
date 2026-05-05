@@ -44,12 +44,11 @@ export class Login {
       .pipe(
         finalize(() => {
           this.isLoading = false;
-          this.cdr.markForCheck(); // đảm bảo UI update
+          this.cdr.markForCheck();  //Update UI immediately
         })
       )
       .subscribe({
         next: () => {
-          // navigate trực tiếp, Angular HttpClient đã chạy trong zone
           this.router.navigate(['/profile']);
         },
         error: (error) => {
@@ -59,7 +58,7 @@ export class Login {
             this.clearFormForReLogin();
           }
 
-          this.cdr.markForCheck(); // cập nhật UI ngay
+          this.cdr.markForCheck(); 
         }
       });
   }

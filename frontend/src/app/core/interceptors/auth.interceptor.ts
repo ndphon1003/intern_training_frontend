@@ -9,15 +9,13 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   const url = req.url;
 
-  // Bypass đúng API này
   if (url.includes('/api/product/list')) {
     return next(req);
   }
 
-  // Bypass auth API
   if (url.includes('/auth/')) {
     return next(req);
-  }
+  } //by pass public route
 
   let token: string | null = null;
 

@@ -1,13 +1,13 @@
-import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import {
-  ProductListResponse,
-  GetOwnProductResponse,
-  GetProductDetailResponse,
   CreateProductRequest,
   CreateProductResponse,
+  GetOwnProductResponse,
+  GetProductDetailResponse,
+  ProductListResponse,
   UpdateProductRequest
 } from '../models/product.model';
 
@@ -29,8 +29,6 @@ export class ProductService {
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'X-Internal-Key': this.SECRET_KEY,
-      // nếu cần token thì mở ra:
-      // Authorization: `Bearer ${this.authService.getToken()}`
     });
   }
 
@@ -44,7 +42,7 @@ export class ProductService {
       `${this.API_URL}/list`,
       { headers: this.getHeaders() }
     );
-  }
+  } //Header with no token attach directly
 
   // GET PRODUCT DETAIL (PUBLIC)
   getProductDetail(productId: string): Observable<GetProductDetailResponse> {
