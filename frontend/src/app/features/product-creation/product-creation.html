@@ -1,0 +1,74 @@
+<div class="pc-container">
+
+  <!-- Header -->
+  <div class="pc-header">
+    <button class="btn-secondary-dark" (click)="goBack()">← Back</button>
+    <h2>Create Product</h2>
+  </div>
+
+  <!-- Card -->
+  <div class="form-card">
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <!-- Name -->
+      <div class="form-group">
+        <label>Name</label>
+        <input class="input-dark" formControlName="name" />
+
+        <span class="error" *ngIf="f.name.touched && f.name.invalid">
+          Name must be at least 3 characters
+        </span>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="input-dark" formControlName="description"></textarea>
+
+        <span class="error" *ngIf="f.description.touched && f.description.invalid">
+          Description is required
+        </span>
+      </div>
+
+      <!-- Price -->
+      <div class="form-group">
+        <label>Price (₫)</label>
+        <input type="number" class="input-dark" formControlName="price" />
+
+        <span class="error" *ngIf="f.price.touched && f.price.invalid">
+          Price must be ≥ 1000
+        </span>
+      </div>
+
+      <!-- Stock -->
+      <div class="form-group">
+        <label>Stock Quantity</label>
+        <input type="number" class="input-dark" formControlName="stockQuantity" />
+
+        <span class="error" *ngIf="f.stockQuantity.touched && f.stockQuantity.invalid">
+          Minimum stock is 1
+        </span>
+      </div>
+
+      <!-- Error -->
+      <div *ngIf="errorMessage" class="error global">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Actions -->
+      <div class="actions">
+        <button
+          type="submit"
+          class="btn-primary-dark"
+          [disabled]="isLoading"
+        >
+          {{ isLoading ? 'Creating...' : 'Create Product' }}
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

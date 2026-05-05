@@ -1,10 +1,4 @@
-export interface Product {
-  product_id: string;
-  name: string;
-  description: string;
-  price: number;
-  stockQuantity: number;
-}
+
 
 export interface Product {
   product_id: string;
@@ -21,10 +15,42 @@ export interface Product {
 }
 
 export interface ProductListResponse {
+  product_id: string;
+}
+
+export interface GetOwnProductResponse {
   code: number;
   message: string;
   data: {
     totalProduct: number;
     listProduct: Product[];
   };
+}
+
+export interface CreateProductRequest {
+  name: string;
+  description: string;
+  price: number;
+  stockQuantity: number;
+}
+
+export interface CreateProductResponse {
+  code: number;
+  message: string;
+  data: any; 
+}
+
+export interface GetProductDetailResponse {
+  code: number;
+  message: string;
+  data: Product;
+}
+
+export interface UpdateProductRequest {
+  productId: string;
+  name: string;
+  description: string;
+  price: number;
+  public: boolean;
+  deleted: boolean;
 }

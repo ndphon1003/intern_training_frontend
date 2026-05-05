@@ -13,6 +13,24 @@ export const routes: Routes = [
     {path: 'auth/logout', component: Logout},
     {path: 'product/:id', component: ProductDetails},
     { 
+    path: 'product-management',
+    loadComponent: () =>
+        import('./features/product-management/product-management').then(m => m.ProductManagement),
+    canActivate: [authGuard]
+    },
+    { 
+    path: 'product-creation',
+    loadComponent: () =>
+        import('./features/product-creation/product-creation').then(m => m.ProductCreation),
+    canActivate: [authGuard]
+    },
+    { 
+    path: 'product-edition/:id',
+    loadComponent: () =>
+        import('./features/product-edition/product-edition').then(m => m.ProductEdition),
+    canActivate: [authGuard]
+    },
+    { 
     path: 'profile',
     loadComponent: () =>
         import('./features/profile/profile').then(m => m.Profile),
